@@ -1,0 +1,35 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /
+spring:
+  profiles:
+    active: home
+# mybatis-plus配置
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  # MyBaits 别名包扫描路径，通过该属性可以给包中的类注册别名
+  type-aliases-package: com.lantin.web.domain
+  # 该配置请和 typeAliasesPackage 一起使用，如果配置了该属性，则仅仅会扫描路径下以该类作为父类的域对象 。
+  type-aliases-super-type: com.lantin.common.domain.base.BasePo
+  configuration:
+    use-generated-keys: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-prefix: mp-sql-log
+  global-config:
+    db-config:
+      id-type: auto
+# swagger 配置
+swagger:
+  base-package: com.lantin.web
+  title: "个人项目接口文档"
+  version: 1.0.0
+  ui-config:
+    submit-methods:
+# 项目个人配置
+com:
+  lantin:
+    id-worker:
+      data-center-id: 3
+      work-id: 3
+

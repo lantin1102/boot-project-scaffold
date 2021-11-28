@@ -1,0 +1,40 @@
+# Redisson 配置
+singleServerConfig:
+  address: "redis://home.ganlq.cn:6379"
+  password: lantin
+  clientName: null
+  #选择使用哪个数据库0~15
+  database: 1
+  #  pingTimeOut: 1000 最新版本已过时
+  idleConnectionTimeout: 10000
+  connectTimeout: 10000
+  timeout: 3000
+  retryAttempts: 3
+  retryInterval: 1500
+  connectionMinimumIdleSize: 24
+  connectionPoolSize: 64
+  dnsMonitoringInterval: 5000
+  #dnsMonitoring: false
+  sslEnableEndpointIdentification: true
+  sslProvider: "JDK"
+  pingConnectionInterval: 0
+  keepAlive: false
+  tcpNoDelay: false
+  subscriptionsPerConnection: 5
+  subscriptionConnectionMinimumIdleSize: 1
+  subscriptionConnectionPoolSize: 50
+## 默认 org.redisson.codec.JsonJacksonCodec 最新版默认org.redisson.codec.MarshallingCodec
+#codec:
+#  class: "org.redisson.codec.JsonJacksonCodec"
+#  默认 NIO
+#transportMode: "NIO"
+threads: 16
+# 默认 32 ，0表示处理器核心数*2
+nettyThreads: 0
+referenceEnabled: true
+lockWatchdogTimeout: 30000
+keepPubSubOrder: true
+#decodeInExecutor: false 最新版本已过时
+useScriptCache: false
+minCleanUpDelay: 5
+maxCleanUpDelay: 1800

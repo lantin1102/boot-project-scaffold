@@ -1,0 +1,29 @@
+{
+  "groups": [
+    {
+      "name": "com.lantin.id-worker",
+      "type": "com.lantin.framework.config.mybatisplus.IdWorkerProperties",
+      "sourceType": "com.lantin.framework.config.mybatisplus.IdWorkerProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "com.lantin.id-worker.work-id",
+      "type": "java.lang.Long",
+      "description": "your server work id",
+      "sourceType": "com.lantin.framework.config.mybatisplus.IdWorkerProperties",
+      "defaultValue": 1
+    },
+    {
+      "name": "com.lantin.id-worker.data-center-id",
+      "type": "java.lang.Long",
+      "sourceType": "com.lantin.framework.config.mybatisplus.IdWorkerProperties",
+      "description": "your server data center id",
+      "defaultValue": 1
+    }
+  ],
+  "hints": [
+    {
+    }
+  ]
+}
