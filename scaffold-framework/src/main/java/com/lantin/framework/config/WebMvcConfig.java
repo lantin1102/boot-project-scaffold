@@ -1,6 +1,9 @@
 package com.lantin.framework.config;
 
+import com.lantin.framework.interceptor.CoreInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -10,4 +13,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
+	@Autowired
+	CoreInterceptor coreInterceptor;
+
+	/*依次添加拦截器*/
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(coreInterceptor)
+				.addPathPatterns("/**");
+
+	}
 }

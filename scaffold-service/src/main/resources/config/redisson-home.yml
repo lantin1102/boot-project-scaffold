@@ -4,7 +4,7 @@ singleServerConfig:
   password: lantin
   clientName: null
   #选择使用哪个数据库0~15
-  database: 1
+  database: 0
   #  pingTimeOut: 1000 最新版本已过时
   idleConnectionTimeout: 10000
   connectTimeout: 10000
@@ -24,8 +24,8 @@ singleServerConfig:
   subscriptionConnectionMinimumIdleSize: 1
   subscriptionConnectionPoolSize: 50
 ## 默认 org.redisson.codec.JsonJacksonCodec 最新版默认org.redisson.codec.MarshallingCodec
-#codec:
-#  class: "org.redisson.codec.JsonJacksonCodec"
+codec:
+  class: "org.redisson.codec.JsonJacksonCodec"
 #  默认 NIO
 #transportMode: "NIO"
 threads: 16

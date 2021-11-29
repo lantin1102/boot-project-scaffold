@@ -4,7 +4,8 @@ server:
     context-path: /
 spring:
   profiles:
-    active: home
+    active: dev
+
 # mybatis-plus配置
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
@@ -27,9 +28,8 @@ swagger:
   ui-config:
     submit-methods:
 # 项目个人配置
-com:
-  lantin:
-    id-worker:
-      data-center-id: 3
-      work-id: 3
+com.lantin:
+  id-worker:
+    data-center-id: 3
+    work-id: 3
 

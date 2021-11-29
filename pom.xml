@@ -90,7 +90,7 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>3.4.3.4</version>
+                <version>${mybatis.plus.boot.version}</version>
             </dependency>
 
             <!--druid数据源 boot启动依赖-->
@@ -128,12 +128,18 @@
                 <artifactId>fastjson</artifactId>
                 <version>${ali.fastjson.version}</version>
             </dependency>
-
+            <!-- kryo序列化依赖-->
+            <dependency>
+                <groupId>com.esotericsoftware</groupId>
+                <artifactId>kryo</artifactId>
+                <version>5.0.3</version>
+            </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons.lang3.version}</version>
             </dependency>
+            <!-- mapstruct依赖-->
             <dependency>
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct-processor</artifactId>
@@ -147,9 +153,11 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-inline</artifactId>
-                <version>4.0.0</version>
+                <version>${mockito.version}</version>
                 <scope>test</scope>
             </dependency>
+
+
             <!-- 项目模块版本管理 start-->
             <dependency>
                 <groupId>com.lantin</groupId>

@@ -1,14 +1,17 @@
 快速搭建spring boot项目脚手架
 
 一、项目结构
-主要分为以下几个层次
-parant 负责依赖版本管理，插件版本管理
+
+1.
+版本 open jdk 17.0.1 springboot 2.6.0
+
+主要分为以下几个层次 parant 负责依赖版本管理，插件版本管理
 
 common 存放工具类 通用常量 通用封装对象 项目异常
 
 framework 系统框架，负责项目的配置，中间件配置等
 
-service 服务层，具体的业务逻辑处理  项目启动入口  controller service mapper
+service 服务层，具体的业务逻辑处理 项目启动入口 controller service mapper
 
 mybatis-plus-generator mp的逆向工厂生成器 不参与项目打包
 
