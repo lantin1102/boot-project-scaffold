@@ -14,14 +14,14 @@ import java.util.Date;
  * @author Lantin
  */
 public class DateUtils {
-	public static final String DATE_LONG = "yyyy-MM-dd HH:mm:ss";
+	public static final String STANDARD_DATE = "yyyy-MM-dd HH:mm:ss";
 	public static final String ISO_LOCAL_DATE_TIME = "yyyy-MM-dd'T'HH:mm:ss";
-	public static final String DATE_SHORT = "yyyy-MM-dd";
+	public static final String DATE = "yyyy-MM-dd";
 	public static final String TIME = "HH:mm:ss";
 
-	public static final DateTimeFormatter FORMATTER_DATE_TIME = DateTimeFormatter.ofPattern(DATE_LONG);
+	public static final DateTimeFormatter FORMATTER_DATE_TIME = DateTimeFormatter.ofPattern(STANDARD_DATE);
 	public static final DateTimeFormatter FORMATTER_ISO_LOCAL_DATE_TIME = DateTimeFormatter.ofPattern(ISO_LOCAL_DATE_TIME);
-	public static final DateTimeFormatter FORMATTER_DATE = DateTimeFormatter.ofPattern(DATE_SHORT);
+	public static final DateTimeFormatter FORMATTER_DATE = DateTimeFormatter.ofPattern(DATE);
 	public static final DateTimeFormatter FORMATTER_TIME = DateTimeFormatter.ofPattern(TIME);
 
 	/**
@@ -30,9 +30,9 @@ public class DateUtils {
 	 * @param date Date时间
 	 * @return java.lang.String
 	 */
-	public static String formDateTime(Date date) {
+	public static String formatDate(Date date) {
 
-		return formDateTime(date, DATE_LONG);
+		return formatDate(date, STANDARD_DATE);
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class DateUtils {
 	 * @param pattern 想要的格式
 	 * @return java.lang.String
 	 */
-	public static String formDateTime(Date date, String pattern) {
+	public static String formatDate(Date date, String pattern) {
 		if (date == null) {
 			return null;
 		}
@@ -63,7 +63,7 @@ public class DateUtils {
 	 * @return java.util.Date
 	 */
 	public static Date parseDate(String date) {
-		return parseDate(date, DATE_LONG);
+		return parseDate(date, STANDARD_DATE);
 	}
 
 	/**

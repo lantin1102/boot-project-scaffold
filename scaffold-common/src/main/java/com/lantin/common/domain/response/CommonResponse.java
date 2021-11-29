@@ -3,6 +3,7 @@ package com.lantin.common.domain.response;
 import com.lantin.common.domain.base.BaseResponse;
 import com.lantin.common.enums.ErrorCode;
 import com.lantin.common.exception.BusinessException;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import static com.lantin.common.constant.BaseConstants.*;
@@ -13,6 +14,7 @@ import static com.lantin.common.constant.BaseConstants.*;
  */
 
 @Data
+@ApiModel(value = "通用返回封装", parent = BaseResponse.class)
 public class CommonResponse<T> extends BaseResponse {
 
 	private T data;

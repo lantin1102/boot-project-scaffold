@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 /**
  * <p>
  * 前端控制器
@@ -30,7 +32,7 @@ public class AccountController {
 	@GetMapping("{id}")
 	public CommonResponse<AccountVo> getUserAccount(@PathVariable("id") Integer id) {
 		AccountDto account = accountService.findAccount(id);
-
+		account.setCtime(LocalDateTime.now());
 		return CommonResponse.success(accountConvert.dto2Vo(account));
 	}
 

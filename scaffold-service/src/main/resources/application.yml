@@ -4,8 +4,10 @@ server:
     context-path: /
 spring:
   profiles:
-    active: dev
-
+    active: home,swagger
+  jackson:
+    # 这个设置只对Date Timestamp类型有效
+    date-format: yyyy-MM-dd HH:mm:ss
 # mybatis-plus配置
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
@@ -20,16 +22,10 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
-# swagger 配置
-swagger:
-  base-package: com.lantin.web
-  title: "个人项目接口文档"
-  version: 1.0.0
-  ui-config:
-    submit-methods:
 # 项目个人配置
-com.lantin:
-  id-worker:
-    data-center-id: 3
-    work-id: 3
+com:
+  lantin:
+    id-worker:
+      data-center-id: 3
+      work-id: 3
 

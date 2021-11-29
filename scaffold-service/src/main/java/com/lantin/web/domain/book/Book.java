@@ -2,6 +2,7 @@ package com.lantin.web.domain.book;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.lantin.common.domain.base.BasePo;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**

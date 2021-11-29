@@ -1,0 +1,35 @@
+knife4j:
+  enable: true
+  documents:
+    - group: 3.X版本
+      name: 接口签名
+      locations: classpath:sign/*
+  setting:
+    language: zh-CN
+    enableSwaggerModels: true
+    enableDocumentManage: true
+    swaggerModelName: 实体类列表
+    enableVersion: false
+    enableReloadCacheParameter: false
+    enableAfterScript: true
+    enableFilterMultipartApiMethodType: POST
+    enableFilterMultipartApis: false
+    enableRequestCache: true
+    enableHost: false
+    enableHostText: 192.168.31.193:8000
+    enableHomeCustom: true
+    homeCustomLocation: classpath:markdown/home.md
+    enableSearch: false
+    enableFooter: false
+    enableFooterCustom: true
+    footerCustomContent: Apache License 2.0 | Copyright lantin 2021-[浙江八一菜刀股份有限公司](https://gitee.com/xiaoym/knife4j)
+    enableDynamicParameter: false
+    enableDebug: true
+    enableOpenApi: false
+    enableGroup: true
+  cors: false
+  production: false
+  basic:
+    enable: false
+    username: test
+    password: 123

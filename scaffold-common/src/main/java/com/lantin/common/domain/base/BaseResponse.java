@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.lantin.common.serialier.CustomTimeStampSerializer;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -16,6 +18,7 @@ import java.time.LocalDateTime;
 @JsonInclude
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
+@ApiModel("返回封装基类")
 public class BaseResponse implements Serializable {
 
 	protected Integer code;
@@ -25,6 +28,7 @@ public class BaseResponse implements Serializable {
 	 * 序列化为long 时间戳
 	 */
 	@JsonSerialize(using = CustomTimeStampSerializer.class)
+	@ApiModelProperty(dataType = "java.lang.Long")
 	protected LocalDateTime ts;
 
 	protected String requestId;

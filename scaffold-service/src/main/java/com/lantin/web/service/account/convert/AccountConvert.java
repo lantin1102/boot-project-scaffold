@@ -1,7 +1,7 @@
 package com.lantin.web.service.account.convert;
 
-import com.lantin.web.domain.account.dto.AccountDto;
 import com.lantin.web.domain.account.Account;
+import com.lantin.web.domain.account.dto.AccountDto;
 import com.lantin.web.domain.account.vo.AccountVo;
 import org.mapstruct.Mapper;
 
@@ -13,6 +13,7 @@ import org.mapstruct.Mapper;
 public interface AccountConvert {
 
 	AccountDto vo2Dto(AccountVo accountVo);
+
 	AccountVo dto2Vo(AccountDto accountDto);
 
 	Account dto2Entity(AccountDto accountDto);
