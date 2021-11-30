@@ -3,7 +3,7 @@
 一、项目结构
 
 1.
-版本 open jdk 17.0.1 springboot 2.6.0
+版本 open jdk 17.0.1 springboot 2.5.6(2.6.0对swagger不兼容)
 
 主要分为以下几个层次 parant 负责依赖版本管理，插件版本管理
 
