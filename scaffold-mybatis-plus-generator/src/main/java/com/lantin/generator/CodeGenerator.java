@@ -17,13 +17,17 @@ import java.util.Arrays;
  */
 public class CodeGenerator {
 	// TODO 修改服务名以及数据表名
-	private static final String SERVICE_NAME = "spring";
-	private static final String DATA_SOURCE_USER_NAME = "root";
-	private static final String DATA_SOURCE_PASSWORD = "root";
-	private static final String[] TABLE_NAMES = new String[]{
-			"book"
-	};
+	private static final String SERVICE_NAME = "activity";
+	private static final String DATA_SOURCE_USER_NAME = "game_admin";
+	private static final String DATA_SOURCE_PASSWORD = "CGNLUjzjG4sI4Xa6Mp7rGzfZlE8H2bcU";
+	private static final String JDBC_URL = "jdbc:mysql://10.221.36.115:5425";
+	private static final String URL_CONFIG_STR = "useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8";
+	private static final String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
+	private static final String PACKAGE_PREFIX = "com.lantin.";
 
+	private static final String[] TABLE_NAMES = new String[]{
+			"activity_common_lottery_prize"
+	};
 	// TODO 默认生成entity，需要生成DTO修改此变量
 	// 一般情况下要先生成 DTO类 然后修改此参数再生成 PO 类。
 	private static final Boolean IS_DTO = false;
@@ -54,16 +58,16 @@ public class CodeGenerator {
 		// 数据库配置
 		DataSourceConfig dsc = new DataSourceConfig();
 		dsc.setDbType(DbType.MYSQL);
-		dsc.setUrl("jdbc:mysql://home.ganlq.cn:3305/" + SERVICE_NAME
-				+ "?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8");
-		dsc.setDriverName("com.mysql.cj.jdbc.Driver");
+		dsc.setUrl(JDBC_URL + "/" + SERVICE_NAME
+				+ "?" + URL_CONFIG_STR);
+		dsc.setDriverName(DRIVER_CLASS_NAME);
 		dsc.setUsername(DATA_SOURCE_USER_NAME);
 		dsc.setPassword(DATA_SOURCE_PASSWORD);
 		mpg.setDataSource(dsc);
 
 		// 包配置
 		PackageConfig pc = new PackageConfig();
-		pc.setParent("com.lantin."+SERVICE_NAME);
+		pc.setParent(PACKAGE_PREFIX + SERVICE_NAME);
 
 		pc.setServiceImpl("service.impl");
 		pc.setXml("mapper");

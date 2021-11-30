@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
 <#if entityLombokModel>
 import lombok.Data;
 </#if>
+import java.io.Serial;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 /**

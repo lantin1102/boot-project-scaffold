@@ -1,10 +1,10 @@
 server:
-  port: 8081
+  port: 8088
   servlet:
     context-path: /
 spring:
   profiles:
-    active: home,swagger
+    active: dev,swagger
   jackson:
     # 这个设置只对Date Timestamp类型有效
     date-format: yyyy-MM-dd HH:mm:ss
