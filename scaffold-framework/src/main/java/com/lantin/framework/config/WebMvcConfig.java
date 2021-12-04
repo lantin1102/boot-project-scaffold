@@ -38,6 +38,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 	/**
 	 * 全局处理接收时间参数的问题
+	 * 非requestBody注解走的是 RequestMappingHandlerAdapter绑定参数
 	 *
 	 * @param registry 格式化注册器
 	 */
