@@ -1,10 +1,10 @@
 spring:
   # 数据源配置
   datasource:
-    username: root
-    password: root
+    username: lantin
+    password: sxdBETsi0nPhgXgTTGlb9cwo84jcW6UXXhBLt2vujWo
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://home.ganlq.cn:3305/spring?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://192.168.31.10:3306/spring?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
   # 线程池自动配置
   task:
     execution:
@@ -13,9 +13,9 @@ spring:
         allow-core-thread-timeout: true
         core-size: 10
   redis:
-    host: home.ganlq.cn
+    host: 192.168.31.10
     port: 6379
-    password: lantin
+    password: W9Pm3rozPTCTzD7AMd7bT_305K32a4KSKVDL_GBUxlY
     connect-timeout: 2000
     timeout: 10000
     database: 0

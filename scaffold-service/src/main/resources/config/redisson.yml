@@ -1,7 +1,7 @@
 # Redisson 配置
 singleServerConfig:
-  address: "redis://home.ganlq.cn:6379"
-  password: lantin
+  address: "redis://192.168.31.10:6379"
+  password: W9Pm3rozPTCTzD7AMd7bT_305K32a4KSKVDL_GBUxlY
   clientName: null
   #选择使用哪个数据库0~15
   database: 0

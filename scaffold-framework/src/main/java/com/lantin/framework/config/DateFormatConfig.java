@@ -8,8 +8,6 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.lantin.common.utils.DateUtils;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import java.time.LocalDate;
@@ -25,13 +23,15 @@ import java.time.LocalTime;
  * @author Gan Luanqing
  * @date 2021/11/30 2:20 周二
  */
-@Configuration
+// @Configuration
 public class DateFormatConfig {
 
 	/**
 	 * 自定义jackson对jdk8新的时间类的序列化的实现
+	 * <p>
+	 * 只针对request body json数据绑定有效
 	 */
-	@Bean
+	// @Bean
 	@Primary
 	public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
 		return builder -> builder.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer(DateUtils.FORMATTER_DATE_TIME))

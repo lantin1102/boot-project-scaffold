@@ -45,5 +45,4 @@ public class MybatisPlusConfig {
 		return new DefaultIdentifierGenerator(idWorkerProperties.getWorkId(), idWorkerProperties.getDataCenterId());
 	}
 
-
 }
