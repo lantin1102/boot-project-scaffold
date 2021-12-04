@@ -5,6 +5,9 @@ import com.lantin.web.domain.book.dto.BookDto;
 import com.lantin.web.domain.book.vo.BookVo;
 import com.lantin.web.service.book.BookService;
 import com.lantin.web.service.book.convert.BookConvert;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBatch;
 import org.redisson.api.RedissonClient;
@@ -12,8 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -36,79 +38,46 @@ public class BookController {
 	@Autowired
 	BookConvert bookConvert;
 
-	// @GetMapping("{id}")
-	// @ApiOperation("查询单个书籍信息")
-	// @ApiImplicitParams({
-	// 		@ApiImplicitParam(name = "id", value = "书籍id", required = true, dataType = "Integer", paramType = "path")
-	// })
-	// public CommonResponse<BookVo> getBook(@PathVariable("id") Integer id) {
-	//
-	// 	BookVo bookVo = bookConvert.dto2Vo(bookService.getBook(id));
-	// 	return CommonResponse.success(bookVo);
-	// }
-	@Autowired
-	private RedissonClient redissonClient;
-
-	@GetMapping("one")
-	public CommonResponse<BookVo> getBook(@RequestParam("id") @Min(value = 1, message = "id不能小于1") Integer id,
-	                                      @RequestParam("name") @NotBlank(message = "名称不能为空") String name) {
+	@ApiOperation("查询单个书籍信息")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "id", value = "书籍id", required = true, dataType = "Integer", paramType = "path")
+	})
+	@GetMapping("{id}")
+	public CommonResponse<BookVo> getBook(@PathVariable("id") @NotNull Integer id) {
 
 		BookVo bookVo = bookConvert.dto2Vo(bookService.getBook(id));
 		return CommonResponse.success(bookVo);
 	}
 
-	// @ApiOperation("查询所有书籍信息")
-	// @ApiImplicitParams({
-	//
-	// })
+	@Autowired
+	private RedissonClient redissonClient;
+
 	@GetMapping
 	public CommonResponse<List<BookVo>> getAllBooks() {
 		List<BookDto> allBooks = bookService.getAllBooks();
-		RBatch batch = redissonClient.createBatch();
-		
 		return CommonResponse.success(bookConvert.batchConvertDto(allBooks));
 	}
-
-	// @ApiOperation("保存书籍")
-	// @ApiImplicitParams({
-	// 		@ApiImplicitParam(name = "bookVo", value = "书籍信息", required = true, dataType = "书籍信息Vo", paramType = "body")
-	// })
-	// @PostMapping
-	// public CommonResponse<Boolean> saveBook(@RequestBody @Validated BookVo bookVo) {
-	// 	BookDto bookDto = bookConvert.vo2Dto(bookVo);
-	//
-	// 	return CommonResponse.success(bookService.saveBook(bookDto));
-	// }
 
 	/**
 	 * 表单提交
 	 *
-	 * @param bookVo
+	 * @param bookVo bookVo
 	 * @return
 	 */
 	@PostMapping
-	public CommonResponse<Boolean> saveBook(@Validated BookVo bookVo) {
+	public CommonResponse<Boolean> saveBook(@RequestBody @Validated BookVo bookVo) {
 		BookDto bookDto = bookConvert.vo2Dto(bookVo);
-
 		return CommonResponse.success(bookService.saveBook(bookDto));
 	}
 
-	// @ApiOperation("编辑书籍")
-	// @ApiImplicitParams({
-	// 		@ApiImplicitParam(name = "bookVo", value = "书籍信息", required = true, dataType = "书籍信息Vo", paramType = "body")
-	// })
 	@PutMapping
-	public CommonResponse<Boolean> modifyBook(@RequestBody BookVo bookVo) {
+	public CommonResponse<Boolean> modifyBook(@RequestBody @Validated BookVo bookVo) {
 		BookDto bookDto = bookConvert.vo2Dto(bookVo);
 		return CommonResponse.success(bookService.modifyBook(bookDto));
 	}
 
-	// @ApiOperation("删除单个书籍")
-	// @ApiImplicitParams({
-	// 		@ApiImplicitParam(name = "id", value = "书籍id", required = true, dataType = "Integer", paramType = "path")
-	// })
 	@DeleteMapping("{id}")
-	public CommonResponse<Boolean> deleteBook(@PathVariable("id") Integer id) {
+	public CommonResponse<Boolean> deleteBook(@PathVariable("id") @NotNull Integer id) {
 		return CommonResponse.success(bookService.deleteBook(id));
 	}
 }
