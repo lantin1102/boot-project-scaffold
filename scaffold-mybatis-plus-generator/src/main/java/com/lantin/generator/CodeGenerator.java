@@ -17,16 +17,16 @@ import java.util.Arrays;
  */
 public class CodeGenerator {
 	// TODO 修改服务名以及数据表名
-	private static final String SERVICE_NAME = "activity";
-	private static final String DATA_SOURCE_USER_NAME = "game_admin";
-	private static final String DATA_SOURCE_PASSWORD = "CGNLUjzjG4sI4Xa6Mp7rGzfZlE8H2bcU";
-	private static final String JDBC_URL = "jdbc:mysql://10.221.36.115:5425";
+	private static final String SERVICE_NAME = "mall";
+	private static final String DATA_SOURCE_USER_NAME = "lantin";
+	private static final String DATA_SOURCE_PASSWORD = "sxdBETsi0nPhgXgTTGlb9cwo84jcW6UXXhBLt2vujWo";
+	private static final String JDBC_URL = "jdbc:mysql://home.ganlq.cn:5307";
 	private static final String URL_CONFIG_STR = "useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8";
 	private static final String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 	private static final String PACKAGE_PREFIX = "com.lantin.";
 
 	private static final String[] TABLE_NAMES = new String[]{
-			"activity_common_lottery_prize"
+			"mall_user"
 	};
 	// TODO 默认生成entity，需要生成DTO修改此变量
 	// 一般情况下要先生成 DTO类 然后修改此参数再生成 PO 类。

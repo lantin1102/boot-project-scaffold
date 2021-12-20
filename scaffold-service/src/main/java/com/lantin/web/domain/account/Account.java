@@ -3,6 +3,7 @@ package com.lantin.web.domain.account;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.lantin.common.domain.base.BasePo;
 import lombok.Data;
+import lombok.ToString;
 
 /**
  * <p>
@@ -12,6 +13,7 @@ import lombok.Data;
  * @author Gan Luanqing
  */
 @Data
+@ToString(callSuper = true)
 @TableName("account")
 public class Account extends BasePo {
 
@@ -19,4 +21,5 @@ public class Account extends BasePo {
 
 	private Double money;
 
+	private String ext;
 }

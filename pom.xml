@@ -39,6 +39,7 @@
         <redisson.boot.version>3.16.4</redisson.boot.version>
         <servlet.version>4.0.1</servlet.version>
         <spring.boot.version>2.5.6</spring.boot.version>
+        <spring.cloud.version>2020.0.3</spring.cloud.version>
         <spring.native.version>0.10.0-SNAPSHOT</spring.native.version>
         <swagger.version>3.0.0</swagger.version>
     </properties>

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lantin.web.domain.book.Book;
 import com.lantin.web.domain.book.dto.BookDto;
-import com.lantin.web.mapper.BookMapper;
+import com.lantin.web.mapper.db1.BookMapper;
 import com.lantin.web.service.book.convert.BookConvert;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,21 +1,37 @@
 spring:
   # 数据源配置
   datasource:
-    username: lantin
-    password: sxdBETsi0nPhgXgTTGlb9cwo84jcW6UXXhBLt2vujWo
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.31.10:3306/spring?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    dynamic:
+      strict: false
+      primary: db1
+      datasource:
+        db1:
+          username: lantin
+          password: sxdBETsi0nPhgXgTTGlb9cwo84jcW6UXXhBLt2vujWo
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://home.ganlq.cn:5307/spring?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        db2:
+          username: lantin
+          password: sxdBETsi0nPhgXgTTGlb9cwo84jcW6UXXhBLt2vujWo
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://home.ganlq.cn:5307/mall?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    hikari:
+      minimum-idle: 3
+      maximum-pool-size: 10
+      connection-test-query: SELECT 1
   # 线程池自动配置
   task:
     execution:
       thread-name-prefix: dev-task-
       pool:
         allow-core-thread-timeout: true
-        core-size: 100
+        core-size: 25
+        max-size: 100
+
   redis:
-    host: localhost
+    host: 192.168.31.10
     port: 6379
-    password:
+    password: W9Pm3rozPTCTzD7AMd7bT_305K32a4KSKVDL_GBUxlY
     connect-timeout: 2000
     timeout: 10000
     database: 0
@@ -30,4 +46,4 @@ spring:
         # 连接池中的最小空闲连接 默认为8
         min-idle: 0
     redisson:
-      file: classpath:config/redisson-dev.yml
+      file: classpath:config/redisson.yml

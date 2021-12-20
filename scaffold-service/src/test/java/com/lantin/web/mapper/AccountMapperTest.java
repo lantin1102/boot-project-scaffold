@@ -3,6 +3,7 @@ package com.lantin.web.mapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.lantin.test.base.BaseSpringBootTest;
 import com.lantin.web.domain.account.Account;
+import com.lantin.web.mapper.db1.AccountMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

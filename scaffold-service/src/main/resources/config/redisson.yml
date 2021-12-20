@@ -1,6 +1,6 @@
 # Redisson 配置
 singleServerConfig:
-  address: "redis://192.168.31.10:6379"
+  address: "redis://home.ganlq.cn:7308"
   password: W9Pm3rozPTCTzD7AMd7bT_305K32a4KSKVDL_GBUxlY
   clientName: null
   #选择使用哪个数据库0~15
@@ -25,7 +25,7 @@ singleServerConfig:
   subscriptionConnectionPoolSize: 50
 ## 使用org.redisson.codec.JsonJacksonCodec序列化 最新版redisson默认org.redisson.codec.MarshallingCodec
 codec:
-  class: "org.redisson.codec.JsonJacksonCodec"
+  class: "org.redisson.codec.Kryo5Codec"
 #  默认 NIO
 #transportMode: "NIO"
 threads: 16

@@ -1,4 +1,4 @@
-package com.lantin.web.mapper;
+package com.lantin.web.mapper.db1;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
