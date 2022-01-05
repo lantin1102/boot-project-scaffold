@@ -4,7 +4,7 @@ server:
     context-path: /
 spring:
   profiles:
-    active: dev,swagger
+    active: home,swagger
   jackson:
     # 这个设置只对Date Timestamp类型有效
     date-format: yyyy-MM-dd HH:mm:ss
