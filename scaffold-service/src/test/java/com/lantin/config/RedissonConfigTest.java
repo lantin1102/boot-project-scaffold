@@ -7,8 +7,12 @@ import org.redisson.api.RBucket;
 import org.redisson.api.RFuture;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Gan Luanqing
@@ -35,5 +39,28 @@ public class RedissonConfigTest extends BaseSpringBootTest {
 		RFuture<Object> async = redissonClient.getBucket(key1).getAsync();
 		Object o = async.get();
 		System.out.println(o);
+	}
+	@Test
+	public void test11(){
+		String key = "fad";
+		Integer obj  = (Integer) redissonClient.getBucket(key).get();
+		Assert.notNull(obj);
+
+		boolean exists = redissonClient.getBucket(key).isExists();
+		Assert.isTrue(exists);
+		// long fad = redissonClient.getAtomicLong(key).getAndSet(1);
+
+
+		List<Integer> list = new ArrayList<>();
+		for (int i = 0; i < 10; i++) {
+			list.add(i);
+		}
+		list.parallelStream()
+				.forEach((num)->{
+					long l = redissonClient.getAtomicLong(key).incrementAndGet();
+					if (l==1){
+						redissonClient.getAtomicLong(key).expire(360, TimeUnit.SECONDS);
+					}
+				});
 	}
 }
