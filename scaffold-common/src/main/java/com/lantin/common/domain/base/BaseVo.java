@@ -16,7 +16,7 @@ public class BaseVo implements Serializable {
 	@Override
 	public String toString() {
 		try {
-			return JsonUtils.obj2json(this);
+			return JsonUtils.fastObj2json(this);
 		} catch (Exception ignored) {
 		}
 		return "";

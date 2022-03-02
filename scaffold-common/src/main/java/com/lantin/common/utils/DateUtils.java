@@ -2,6 +2,7 @@ package com.lantin.common.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -93,4 +94,10 @@ public class DateUtils {
 		}
 		return timestamp;
 	}
+	public static LocalDate date2LocalDate(Date date){
+		return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	}
+
+
+
 }
