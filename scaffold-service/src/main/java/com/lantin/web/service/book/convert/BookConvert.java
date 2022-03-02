@@ -22,7 +22,6 @@ public interface BookConvert {
 
 	BookDto entity2Dto(Book account);
 
-
 	List<BookDto> batchConvertEntity(List<Book> list);
 
 	List<BookVo> batchConvertDto(List<BookDto> list);

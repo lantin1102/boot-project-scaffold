@@ -25,7 +25,7 @@ import java.util.List;
 public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements BookService {
 
 	@Autowired
-	BookConvert bookConvert;
+	private BookConvert bookConvert;
 
 	@Override
 	public BookDto getBook(Integer id) {

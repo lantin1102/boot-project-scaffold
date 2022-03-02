@@ -17,8 +17,6 @@ import java.util.List;
  */
 public interface BookService extends IService<Book> {
 
-
-
 	BookDto getBook(Integer id);
 
 	List<BookDto> getAllBooks();
