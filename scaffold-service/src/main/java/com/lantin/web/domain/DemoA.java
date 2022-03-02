@@ -18,4 +18,22 @@ public class DemoA {
 	LocalDate data;
 
 	LocalTime localTime;
+
+	public static void main(String[] args) {
+		switchString(null);
+	}
+
+
+	static void switchString(String str){
+		switch (str){
+			case "sth":
+				System.out.println("sth");
+				break;
+			case "null":
+				System.out.println("null");
+				break;
+			default:
+				System.out.println("什么都没干");
+		}
+	}
 }
