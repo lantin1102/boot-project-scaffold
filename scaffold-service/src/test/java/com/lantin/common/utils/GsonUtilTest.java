@@ -132,6 +132,7 @@ class GsonUtilTest {
 	public void testBoolean1() throws Exception {
 		JsonSerializeTest data = new JsonSerializeTest();
 		data.setSuccess(true);
+		data.setIsMan(1);
 		String strFast = JsonUtils.fastObj2json(data);
 		System.out.println("fastjson:"+strFast);
 		String strJackson = JsonUtils.jacksonObj2json(data);
