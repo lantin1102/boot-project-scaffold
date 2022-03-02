@@ -21,9 +21,5 @@
       "description": "your server data center id",
       "defaultValue": 1
     }
-  ],
-  "hints": [
-    {
-    }
   ]
 }
