@@ -15,7 +15,7 @@ public class DemoA {
 
 	LocalDateTime dateTime;
 
-	LocalDate data;
+	LocalDate date;
 
 	LocalTime localTime;
 

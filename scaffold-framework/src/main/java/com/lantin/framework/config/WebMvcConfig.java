@@ -30,6 +30,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 	/*依次添加拦截器*/
 
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(coreInterceptor).addPathPatterns("/**");

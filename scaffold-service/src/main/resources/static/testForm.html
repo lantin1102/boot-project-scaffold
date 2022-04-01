@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="/demo/bind/list/data"  method="post" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td><input type="text" name="numbers[]"/></td>
+        </tr>
+        <tr>
+            <td><input type="text" name="numbers[]"/></td>
+        </tr>
+<!--        <tr>-->
+<!--            <td><input type="text" name="points[2].x"/></td>-->
+<!--            <td><input type="text" name="points[2].y"/></td>-->
+<!--        </tr>-->
+        <input type="submit" value="提交信息">
+    </table>
+</form>
+
+<form action="/demo/bind/list/data/2" name="表单2"  method="post" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td><input type="text" name="numbers[0]"/></td>
+        </tr>
+        <tr>
+            <td><input type="text" name="numbers[1]"/></td>
+        </tr>
+        <!--        <tr>-->
+        <!--            <td><input type="text" name="points[2].x"/></td>-->
+        <!--            <td><input type="text" name="points[2].y"/></td>-->
+        <!--        </tr>-->
+        <input type="submit" value="提交信息">
+    </table>
+</form>
+
+</body>
+</html>

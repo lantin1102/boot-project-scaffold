@@ -74,7 +74,7 @@ public class GlobalExceptionHandler {
 	 */
 	@ExceptionHandler(Exception.class)
 	public CommonResponse<?> exceptionHandler(Exception e, HttpServletRequest request) {
-		return CommonResponse.failure(GeneralErrorCode.SYSTEM_WRONG);
+		return CommonResponse.failure(GeneralErrorCode.SYSTEM_WRONG.getCode(), e.getMessage());
 	}
 
 	// private void printApiLog(HttpServletRequest request, CommonResponse<?> resp, Exception e) {

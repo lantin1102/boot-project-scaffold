@@ -4,9 +4,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created on 2021/06/10/18:17 周四
@@ -94,10 +97,163 @@ public class DateUtils {
 		}
 		return timestamp;
 	}
-	public static LocalDate date2LocalDate(Date date){
+
+	public static LocalDate date2LocalDate(Date date) {
 		return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 	}
 
+	public static Date startDateTimeOfDay(Date date) {
+		Calendar instance = Calendar.getInstance();
+		instance.setTime(date);
+		instance.set(Calendar.HOUR_OF_DAY, 0);
+		instance.set(Calendar.SECOND, 0);
+		instance.set(Calendar.MINUTE, 0);
+		instance.set(Calendar.MILLISECOND, 0);
+		return instance.getTime();
+	}
+
+	public static Date endDateTimeOfDay(Date date) {
+		Calendar instance = Calendar.getInstance();
+		instance.setTime(date);
+		instance.set(Calendar.HOUR_OF_DAY, 23);
+		instance.set(Calendar.SECOND, 59);
+		instance.set(Calendar.MINUTE, 59);
+		instance.set(Calendar.MILLISECOND, 0);
+		return instance.getTime();
+	}
+
+	/**
+	 * 返回某日期在一年中的实际周数
+	 * @param date date
+	 * @return 周数
+	 */
+	public static int getActualWeekNum(Date date) {
+		Calendar c = Calendar.getInstance();
+		// 默认为中国惯例 周一为一周的开始,其他时区 TODO
+		c.setFirstDayOfWeek(Calendar.MONDAY);
+		c.setTime(date);
+		return calculateWeekNum(c);
+	}
+
+	/**
+	 * 给定一周的开始时间，返回某日期的校准后周数
+	 *
+	 * @param date    日期
+	 * @param weekDay 一周的哪一天算做开始 定义参考{@link Calendar#SUNDAY} {@link Calendar#MONDAY}
+	 * @param timeStr 具体开始时间 "HH:mm"
+	 * @return 校准后周数
+	 */
+	public static int getCalibratedWeekNum(Date date, int weekDay, String timeStr) {
+		Objects.requireNonNull(date);
+		Calendar c = Calendar.getInstance();
+		// 默认使用中国惯例 周一为一周的开始,其他时区 TODO
+		c.setFirstDayOfWeek(Calendar.MONDAY);
+		c.setTime(date);
+		int actualNum = calculateWeekNum(c);
+
+		c.set(Calendar.DAY_OF_WEEK, weekDay);
+		LocalTime localTime = LocalTime.parse(timeStr);
+		c.set(Calendar.HOUR_OF_DAY, localTime.getHour());
+		c.set(Calendar.MINUTE, localTime.getMinute());
+		c.set(Calendar.SECOND, 0);
+		c.set(Calendar.MILLISECOND, 0);
+		Date calibratedWeekStart = c.getTime();
+		// 周数校准
+		if (date.before(calibratedWeekStart)) {
+			actualNum--;
+		}
+		return actualNum;
+	}
+	private static int calculateWeekNum(Calendar c) {
+		int month = c.get(Calendar.MONTH);
+		int weekInYear = c.get(Calendar.WEEK_OF_YEAR);
+		// 如果月份为12月并且周数为1 表明应该是这一年的第53周（Calender类将此周算为下一年的第一周，返回1）
+		if (month >= 11 && weekInYear <= 1) {
+			weekInYear += 52;
+		}
+		return weekInYear;
+	}
+
+
+
+	public static void main(String[] args) {
+
+
+		// Date date = new Date();
+		// Calendar c = Calendar.getInstance();
+		// int firstDayOfWeek = c.getFirstDayOfWeek();
+		// // c.setFirstDayOfWeek(Calendar.MONDAY);
+		// c.setTime(date);
+		//
+		// System.out.println("目前一周的第一天："+firstDayOfWeek);
+		// System.out.println(formatDate(date)+"是在第"+c.get(Calendar.WEEK_OF_YEAR)+"周");
+		//
+		//
+		//
+		// String  dateStr = "2022-03-26 23:59:59";
+		// date = parseDate(dateStr);
+		// c.setTime(date);
+		// System.out.println(dateStr+"是在第"+c.get(Calendar.WEEK_OF_YEAR)+"周");
+		//
+		// date = parseDate(dateStr);
+		// c.setTime(date);
+		// System.out.println(dateStr+"是在第"+c.get(Calendar.WEEK_OF_YEAR)+"周");
+		int weekDay = 2;
+		String timeStr = "04:00";
+		LocalTime time = LocalTime.parse(timeStr);
+		System.out.println(time);
+		String dateStr = "2022-04-04 00:00:00";
+		System.out.println("当前时间：" + dateStr);
+		Calendar c = Calendar.getInstance();
+		c.setFirstDayOfWeek(Calendar.MONDAY);
+		Date curDate = parseDate(dateStr);
+		c.setTime(curDate);
+		int i = c.get(Calendar.WEEK_OF_YEAR);
+		System.out.println("cur date actual week:" + i);
+		c.set(Calendar.DAY_OF_WEEK, weekDay);
+		c.set(Calendar.HOUR_OF_DAY, time.getHour());
+		c.set(Calendar.MINUTE, time.getMinute());
+		c.set(Calendar.SECOND, time.getSecond());
+		c.set(Calendar.MILLISECOND, 0);
+		System.out.println("新一周的计算时间点" + DateUtils.formatDate(c.getTime()));
+		Date calibratedWeekStartDate = c.getTime();
+		if (curDate.before(calibratedWeekStartDate)) {
+			i--;
+		}
+		System.out.println("校准后的周数" + i);
+		// c.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
+		// Date time1 = c.getTime();
+		// System.out.println("周一时间"+time1);
+		// System.out.println("周一时间"+startDateTimeOfDay(time1));
+		// c.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
+		// Date time2 = c.getTime();
+		// System.out.println("周日时间"+time2);
+		// System.out.println("周一时间"+endDateTimeOfDay(time2));
+
+		//
+		// int dayofWeek = c.get(Calendar.DAY_OF_WEEK);
+		// int firstDayOfWeek = c.getFirstDayOfWeek();
+		// System.out.println(firstDayOfWeek);
+		//
+		// System.out.println(dayofWeek);
+		// System.out.println(time);
+		//  dayofWeek = c.get(Calendar.DAY_OF_WEEK);
+		// System.out.println(dayofWeek);
+		//
+		//
+		// int minimum = c.getMinimum(Calendar.DAY_OF_WEEK);
+		// int maximum = c.getMaximum(Calendar.DAY_OF_WEEK);
+		// int amin = c.getActualMinimum(Calendar.DAY_OF_WEEK);
+		// int amx = c.getActualMaximum(Calendar.DAY_OF_WEEK);
+		//
+		// System.out.println(minimum);
+		// System.out.println(maximum);
+		// System.out.println(amin);
+		// System.out.println(amx);
+		Date now = new Date();
+		int calibratedWeekNum = getCalibratedWeekNum(now, Calendar.MONDAY, "00:00");
+		System.out.println(calibratedWeekNum);
+	}
 
 
 }

@@ -28,7 +28,7 @@ import java.time.LocalTime;
 public class DateFormatConfig {
 
 	/**
-	 * 自定义jackson对jdk8新的时间类的参数绑定
+	 * 自定义jackson对jdk8新的时间类的参数绑定和返回值序列化
 	 * <p>
 	 * x-xxx-form-urlencoding方式的请求走 Model Attribute method processor
 	 * <p>
@@ -37,7 +37,8 @@ public class DateFormatConfig {
 	 */
 	@Bean
 	public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
-		return builder -> builder.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer(DateUtils.FORMATTER_DATE_TIME))
+		return builder -> builder
+				.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer(DateUtils.FORMATTER_DATE_TIME))
 				.serializerByType(LocalDate.class, new LocalDateSerializer(DateUtils.FORMATTER_DATE))
 				.serializerByType(LocalTime.class, new LocalTimeSerializer(DateUtils.FORMATTER_TIME))
 				.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer(DateUtils.FORMATTER_DATE_TIME))
