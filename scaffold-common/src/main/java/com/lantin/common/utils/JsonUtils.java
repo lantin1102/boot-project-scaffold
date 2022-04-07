@@ -4,12 +4,23 @@ import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import org.springframework.util.StringUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -24,7 +35,21 @@ public class JsonUtils {
 
     static {
         mapper = new ObjectMapper();
+        // Date类型格式化
+        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+        // java8 新的时间类 格式化
+        JavaTimeModule javaTimeModule = new JavaTimeModule();
+        //  注意 同一个时间类型不能使用两个格式化格式 后一个会覆盖前一个
+        javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateUtils.FORMATTER_DATE_TIME));
+        javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateUtils.FORMATTER_DATE_TIME));
+        javaTimeModule.addSerializer(LocalDate.class, new LocalDateSerializer(DateUtils.FORMATTER_DATE));
+        javaTimeModule.addDeserializer(LocalDate.class, new LocalDateDeserializer(DateUtils.FORMATTER_DATE));
+        javaTimeModule.addSerializer(LocalTime.class, new LocalTimeSerializer(DateUtils.FORMATTER_TIME));
+        javaTimeModule.addDeserializer(LocalTime.class, new LocalTimeDeserializer(DateUtils.FORMATTER_TIME));
+        //  自己写的时间模块注册进ObjectMapper
+        mapper.registerModule(javaTimeModule);
     }
+
 
     public static String fastObj2json(Object obj) throws Exception {
         return JSON.toJSONString(obj);
@@ -34,7 +59,7 @@ public class JsonUtils {
         return JSON.parseObject(jsonStr, clazz);
     }
 
-    public static Map<String, Object> fastJson2map(String jsonStr) throws Exception {
+    public static Map<String, Object> fastJson2map(String jsonStr) {
         return JSON.parseObject(jsonStr, Map.class);
     }
 

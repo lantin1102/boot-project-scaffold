@@ -31,6 +31,7 @@
         <commons.lang3.version>3.12.0</commons.lang3.version>
         <jackson.version>2.9.8</jackson.version>
         <knife4j.version>3.0.3</knife4j.version>
+        <!--<powermock.version>1.7.4</powermock.version>-->
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <mockito.version>4.0.0</mockito.version>
         <mybatis.generator.version>1.3.7</mybatis.generator.version>

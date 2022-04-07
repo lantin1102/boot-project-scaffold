@@ -30,7 +30,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 	/*依次添加拦截器*/
 
-
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(coreInterceptor).addPathPatterns("/**");
@@ -95,14 +94,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
 				return LocalTime.parse(source, DateUtils.FORMATTER_TIME);
 			}
 		});
-
-	}
-
-	public static void main(String[] args) {
-
-		String time = "22:33:11";
-
-		LocalTime parse = LocalTime.parse(time);
-		System.out.println(parse);
 	}
 }

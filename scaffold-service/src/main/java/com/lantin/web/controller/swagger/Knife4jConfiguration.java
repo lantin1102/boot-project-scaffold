@@ -38,7 +38,6 @@ public class Knife4jConfiguration {
 				.build()
 				.globalRequestParameters(globalRequestParameters())
 				.protocols(new LinkedHashSet<>(Arrays.asList("HTTPS", "HTTP")));
-
 	}
 
 	private List<RequestParameter> globalRequestParameters() {

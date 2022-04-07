@@ -18,19 +18,6 @@ public class DynamicCronTask implements SchedulingConfigurer {
 	DynamicCronTask (){
 		cron = defaultCron;
 
-		// new Thread(new Runnable() {
-		// 	@Override
-		// 	public void run() {
-		// 		try {
-		// 			Thread.sleep(30 * 1000);
-		// 		} catch (InterruptedException e) {
-		// 			e.printStackTrace();
-		// 		}
-		//
-		// 		cron = "0/10 * * * * ?";
-		// 		System.err.println("cron change to: " + cron);
-		// 	}
-		// }).start();
 	}
 
 	@Override

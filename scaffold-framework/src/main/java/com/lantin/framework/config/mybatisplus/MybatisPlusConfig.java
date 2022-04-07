@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
 public class MybatisPlusConfig {
 
 	@Autowired
-	IdWorkerProperties idWorkerProperties;
+	private IdWorkerProperties idWorkerProperties;
 
 	/**
 	 * 添加 MP的分页插件拦截器
