@@ -5,6 +5,7 @@ import com.lantin.web.domain.book.dto.BookDto;
 import org.junit.jupiter.api.Test;
 import org.redisson.api.RBucket;
 import org.redisson.api.RFuture;
+import org.redisson.api.RList;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
@@ -40,6 +41,38 @@ public class RedissonConfigTest extends BaseSpringBootTest {
 		Object o = async.get();
 		System.out.println(o);
 	}
+
+	@Test
+	public void testList(){
+
+	}
+
+	@Test
+	public void testRList(){
+		RList<Object> bList = redissonClient.getList("bList");
+
+		// for (int i = 0; i < 5; i++) {
+		// 	bList.add(new Object());
+		// }
+		// for (Object o : bList) {
+		// 	System.out.println(o);
+		// }
+
+		RList<Object> cList = redissonClient.getList("cList");
+
+		if (!cList.isExists()){
+
+			List<Object> dbData = null;
+			cList.addAll(dbData);
+			cList.expire(10,TimeUnit.HOURS);
+		}
+
+
+		RList<Object> cList1 = redissonClient.getList("cList");
+
+		cList1.add(new Object());
+	}
+
 	@Test
 	public void test11(){
 		String key = "fad";

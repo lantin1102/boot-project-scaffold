@@ -5,9 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.scheduling.support.CronTrigger;
-import org.springframework.stereotype.Component;
 
-@Component("dynamicCronTask")
+// @Component("dynamicCronTask")
 @Slf4j
 public class DynamicCronTask implements SchedulingConfigurer {
 

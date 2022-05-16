@@ -29,12 +29,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	CoreInterceptor coreInterceptor;
 
 	/*依次添加拦截器*/
-
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(coreInterceptor).addPathPatterns("/**");
 
 	}
+
+	// @Override
+	// public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	// 	registry.addResourceHandler("/static/")
+	// }
 
 	/**
 	 * 全局处理接收时间参数的问题

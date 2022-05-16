@@ -3,11 +3,15 @@ server:
   servlet:
     context-path: /
 spring:
-  profiles:
-    active: remote,swagger
+  mvc:
+    servlet:
+      load-on-startup: 1
   jackson:
     # 这个设置只对Date Timestamp类型有效
     date-format: yyyy-MM-dd HH:mm:ss
+  config:
+    activate:
+      on-profile: home,swagger
 # mybatis-plus配置
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
