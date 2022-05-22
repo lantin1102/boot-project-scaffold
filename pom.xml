@@ -23,7 +23,6 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <project.snapshot.version>1.0-SNAPSHOT</project.snapshot.version>
 
         <!--依赖包版本-->
         <ali.fastjson.version>1.2.75</ali.fastjson.version>
@@ -167,12 +166,12 @@
             <dependency>
                 <groupId>com.lantin</groupId>
                 <artifactId>scaffold-framework</artifactId>
-                <version>${project.snapshot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.lantin</groupId>
                 <artifactId>scaffold-common</artifactId>
-                <version>${project.snapshot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <!-- 项目模块版本管理 end-->
         </dependencies>
