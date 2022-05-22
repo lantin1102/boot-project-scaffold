@@ -1,5 +1,5 @@
 server:
-  port: 8087
+  port: 8088
   servlet:
     context-path: /
 spring:
@@ -9,9 +9,8 @@ spring:
   jackson:
     # 这个设置只对Date Timestamp类型有效
     date-format: yyyy-MM-dd HH:mm:ss
-  config:
-    activate:
-      on-profile: home,swagger
+  profiles:
+    active: home,swagger
 # mybatis-plus配置
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml

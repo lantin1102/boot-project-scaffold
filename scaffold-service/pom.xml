@@ -11,7 +11,7 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-
+    <packaging>jar</packaging>
     <dependencies>
 
         <dependency>
@@ -104,6 +104,40 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <!-- 打包包名-->
+        <plugins>
+            <!--springboot的打包插件-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <outputDirectory>../target</outputDirectory>
+                    <finalName>myservice</finalName>
+                    <!--<classifier>exec</classifier>-->
+                    <mainClass>com.lantin.LantinApplication</mainClass>
+                    <layout>ZIP</layout>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-configuration-processor</artifactId>
+                        </exclude>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <!--执行重新打包，将springboot依赖都打进最终的可执行jar包中-->
+                        <goals><goal>repackage</goal></goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
 

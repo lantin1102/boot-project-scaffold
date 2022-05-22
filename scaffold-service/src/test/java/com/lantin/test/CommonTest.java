@@ -7,13 +7,22 @@ import com.lantin.common.domain.response.CommonResponse;
 import com.lantin.web.domain.account.Account;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 
 /**
  * @author Gan Luanqing
  * @date 2021/11/27 20:13 周六
  */
 public class CommonTest {
-
+	@Test
+	public void sortTest(){
+		List<Integer> objects = Arrays.asList(24,2,3,12,5,20);
+		Collections.sort(objects);
+		System.out.println(objects);
+	}
 
 	@Test
 	public void test() throws JsonProcessingException {
@@ -40,4 +49,7 @@ public class CommonTest {
 		System.out.println(a);
 		System.out.println(b);
 	}
+
+
+
 }

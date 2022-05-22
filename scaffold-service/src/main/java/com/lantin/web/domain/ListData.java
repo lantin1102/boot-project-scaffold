@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class ListData {
 
-	String name;
+	private String name;
 
-	List<String> numbers;
+	private List<String> numbers;
 }
