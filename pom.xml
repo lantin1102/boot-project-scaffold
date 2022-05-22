@@ -12,6 +12,7 @@
         <module>scaffold-common</module>
         <module>scaffold-service</module>
         <module>scaffold-mybatis-plus-generator</module>
+        <module>scaffold-api-http</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -171,6 +172,16 @@
             <dependency>
                 <groupId>com.lantin</groupId>
                 <artifactId>scaffold-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lantin</groupId>
+                <artifactId>scaffold-api-http</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lantin</groupId>
+                <artifactId>scaffold-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- 项目模块版本管理 end-->
