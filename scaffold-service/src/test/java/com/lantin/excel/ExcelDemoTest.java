@@ -48,10 +48,7 @@ public class ExcelDemoTest {
 		// 如果这里想使用03 则 传入excelType参数即可
 		EasyExcel.write(fileName, DemoData.class)
 				.sheet("模板")
-				.doWrite(() -> {
-					// 分页查询数据
-					return data();
-				});
+				.doWrite(data());
 
 		// 写法2
 		// fileName = TestFileUtil.getPath() + "simpleWrite" + System.currentTimeMillis() + ".xlsx";
