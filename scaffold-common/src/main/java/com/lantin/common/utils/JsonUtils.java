@@ -51,7 +51,7 @@ public class JsonUtils {
     }
 
 
-    public static String fastObj2json(Object obj) throws Exception {
+    public static String fastObj2json(Object obj)  {
         return JSON.toJSONString(obj);
     }
 

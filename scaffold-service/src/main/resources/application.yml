@@ -10,7 +10,9 @@ spring:
     # 这个设置只对Date Timestamp类型有效
     date-format: yyyy-MM-dd HH:mm:ss
   profiles:
-    active: home,swagger
+    active: local,swagger
+  application:
+    name: boot-project-scaffold
 # mybatis-plus配置
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
@@ -26,9 +28,20 @@ mybatis-plus:
     db-config:
       id-type: auto
 # 项目个人配置
+reply:
+  summary:
+    flushRealtimeToSnapshotIntervalMillis: 3000
 com:
   lantin:
     id-worker:
-      data-center-id: 3
+      data-center-id: 1
       work-id: 3
+logging:
+  pattern:
+    console: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+  file:
+    name: logs/local.logs
+  level:
+    root: info
+    com.baomidou.mybatisplus: debug
 

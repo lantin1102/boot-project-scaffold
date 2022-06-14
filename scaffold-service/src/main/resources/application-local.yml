@@ -1,0 +1,33 @@
+spring:
+  # 数据源配置
+  datasource:
+    username: lantin
+    password: sxdBETsi0nPhgXgTTGlb9cwo84jcW6UXXhBLt2vujWo
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:13306/mydb?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+  # 线程池自动配置
+  task:
+    execution:
+      thread-name-prefix: dev-task-
+      pool:
+        allow-core-thread-timeout: true
+        core-size: 100
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    connect-timeout: 2000
+    timeout: 10000
+    database: 0
+    lettuce:
+      pool:
+        # 连接池最大连接数(使用负值表示没有限制) 默认为8
+        max-active: 8
+        # 连接池最大的阻塞等待时间，默认-1，为没有限制
+        max-wait: 2
+        # 连接池中的最大空闲连接 默认为8
+        max-idle: 8
+        # 连接池中的最小空闲连接 默认为8
+        min-idle: 0
+    redisson:
+      file: classpath:config/redisson-local.yml

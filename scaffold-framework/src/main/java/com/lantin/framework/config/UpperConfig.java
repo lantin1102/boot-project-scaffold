@@ -16,8 +16,8 @@ import java.util.Date;
 @EnableConfigurationProperties({ConfigAProperties.class,ConfigBProperties.class})
 public class UpperConfig {
 
-	private ConfigAProperties configAProperties;
-	private ConfigBProperties configBProperties;
+	private final ConfigAProperties configAProperties;
+	private final ConfigBProperties configBProperties;
 
 	@Autowired
 	WebApplicationContext webApplicationContext;
@@ -41,7 +41,7 @@ public class UpperConfig {
 	}
 
 
-	class UpperClass{
+	static class UpperClass{
 
 	}
 

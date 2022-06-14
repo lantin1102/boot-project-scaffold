@@ -5,11 +5,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lantin.common.domain.response.CommonResponse;
 import com.lantin.web.domain.account.Account;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.math.BigDecimal;
+import java.text.Collator;
+import java.util.*;
 
 
 /**
@@ -17,11 +19,20 @@ import java.util.List;
  * @date 2021/11/27 20:13 周六
  */
 public class CommonTest {
+
+
 	@Test
-	public void sortTest(){
-		List<Integer> objects = Arrays.asList(24,2,3,12,5,20);
+	public void sortTest() {
+		List<Integer> objects = Arrays.asList(24, 11, 12, 9, 18, 20);
 		Collections.sort(objects);
 		System.out.println(objects);
+	}
+
+	@Test
+	public void test2() {
+		System.out.println(System.currentTimeMillis());
+
+
 	}
 
 	@Test
@@ -50,6 +61,169 @@ public class CommonTest {
 		System.out.println(b);
 	}
 
+	@Test
+	public void test33() {
+		Collator instance = Collator.getInstance(Locale.CHINESE);
+		String[] newArray = {"简单", "写写", "我的", "理解", "张泮祺", "孙荣⼤", "万⾬⾠", "1HeHe", "安祉⾂", "宋明瑶", "李博⼀", "Mike", "李正彭", "吴政航", "徐豪"};
+		ArrayList<String> strings = new ArrayList<>(Arrays.asList(newArray));
+		List<People> peopleList = new ArrayList<>();
+		for (int i = 0; i < strings.size(); i++) {
+			People people = new People(i + 1, strings.get(i));
+			peopleList.add(people);
+		}
 
+		Collections.sort(strings);
+
+		Collections.sort(peopleList, (o1, o2) -> instance.compare(o1.getName(), o2.getName()));
+		System.out.println(strings);
+
+		System.out.println(peopleList);
+	}
+
+	@Test
+	public void test444() {
+		String[] newArray = {"简单", "写写", "我的", "理解", "张泮祺", "孙荣⼤", "万⾬⾠", "1HeHe", "安祉⾂", "宋明瑶", "李博⼀", "Mike", "李正彭", "吴政航", "徐豪"};
+		ArrayList<String> strings = new ArrayList<>(Arrays.asList(newArray));
+		List<People> peopleList = new ArrayList<>();
+		for (int i = 0; i < strings.size(); i++) {
+			People people = new People(i + 1, strings.get(i));
+			peopleList.add(people);
+		}
+
+		Collections.sort(peopleList);
+		System.out.println(peopleList);
+	}
+
+	@Test
+	public void streamSort() {
+
+		// stream sort多条件排序
+		// list.sort(comparing()
+		// .thenComparing()
+		// .thenComparing())
+		int i = 3 << 29;
+		double pow = Math.pow(2, 29) * 3;
+		int i1 = BigDecimal.valueOf(pow).intValue();
+		System.out.println(i);
+		System.out.println(i1);
+
+		System.out.println("---------");
+
+		int b = -1 << 29;
+		System.out.println(b);
+		int x = 0b11111111111111111111111111111111;
+		System.out.println();
+		System.out.println(x);
+		int y = 0b11111111111111111111111111111110;
+		System.out.println(y);
+	}
+
+	@Test
+	public void testJiuGongGe() {
+		/**
+		 *  1 2 3
+		 *  4 5 6
+		 *  7 8 9
+		 *
+		 *          1  2  3  4
+		 * 		 *  5  6  7  8
+		 * 		    9 10 11 12
+		 * 		 * 13 14 15 16
+		 *
+		 *
+		 */
+		List<List<Integer>> lineUpMatrix = new ArrayList<>();
+		int dimension = 3;
+		int[][] matrix = new int[dimension][dimension];
+		List<Integer> allPosition = new ArrayList<>();
+		for (int i = 0; i < dimension; i++) {
+			for (int j = 0; j < dimension; j++) {
+				matrix[i][j] = i * dimension + (j + 1);
+				allPosition.add(matrix[i][j]);
+			}
+		}
+		List<List<Integer>> columns = new ArrayList<>();
+		for (int i = 0; i < dimension; i++) {
+			columns.add(new ArrayList<>());
+		}
+		List<Integer> diagonal = new ArrayList<>();
+		List<Integer> backDiagonal = new ArrayList<>();
+		// 每一行
+		for (int i = 0; i < matrix.length; i++) {
+			int[] row = matrix[i];
+			//加入每行的数据
+			lineUpMatrix.add(new ArrayList<>(Arrays.stream(row).boxed().toList()));
+			for (int j = 0; j < matrix[i].length; j++) {
+				int curNum = matrix[i][j];
+				// 加入列数据
+				List<Integer> column = columns.get(j);
+				column.add(curNum);
+				// 对角线
+				if (i == j) {
+					diagonal.add(curNum);
+				} //反对角线
+				if ((i + j) == (dimension - 1)) {
+					backDiagonal.add(curNum);
+				}
+			}
+		}
+		lineUpMatrix.addAll(columns);
+		lineUpMatrix.add(diagonal);
+		lineUpMatrix.add(backDiagonal);
+
+		System.out.println(Arrays.deepToString(matrix));
+		System.out.println(lineUpMatrix);
+
+		List<Integer> userPositionList = Arrays.asList(1,2, 4, 5, 6, 8,7,9);
+
+		long count = lineUpMatrix.stream().filter(userPositionList::containsAll)
+				.count();
+
+		System.out.println(count);
+
+
+	}
+
+	@Test
+	public void testMark() {
+		int x = 0, y = 0;
+		mark:
+		for (; ; ) {
+			if (x > 10) {
+				return;
+			}
+			for (; ; ) {
+				y++;
+				if (x == 10) {
+					break mark;
+				}
+				if (y % 2 == 0) {
+					// continue mark 作用
+					// 回到mark标志下的代码重新执行
+					continue mark;
+
+				}
+				x++;
+			}
+		}
+		System.out.println("x:" + x + "y:" + y);
+	}
+
+
+	@Data
+	@AllArgsConstructor
+	static class People implements Comparable<People> {
+		private int id;
+
+		private String name;
+
+
+		@Override
+		public int compareTo(People o) {
+
+			Collator instance = Collator.getInstance(Locale.CHINESE);
+			return instance.compare(this.name, o.getName());
+		}
+	}
 
 }

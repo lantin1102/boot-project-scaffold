@@ -1,6 +1,7 @@
 package com.lantin.common.utils;
 
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.util.Assert;
 import org.springframework.util.Base64Utils;
 
 import javax.crypto.Cipher;
@@ -9,7 +10,6 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
@@ -65,14 +65,12 @@ public class EncryptUtils {
 	}
 
 
-	public static String encryptWithAES(String msg, String secretKey) {
+	public static byte[] encryptWithAES(String msg, String secretKey) {
 		try {
 			SecretKey secretKeyByte = generateKey(secretKey.getBytes(StandardCharsets.UTF_8));
 			Cipher instance = Cipher.getInstance(AES);
 			instance.init(Cipher.ENCRYPT_MODE, secretKeyByte);
-			byte[] finalBytes = instance.doFinal(msg.getBytes(StandardCharsets.UTF_8));
-			String s = Base64Utils.encodeToString(finalBytes);
-			return URLEncoder.encode(s, StandardCharsets.UTF_8);
+			return instance.doFinal(msg.getBytes(StandardCharsets.UTF_8));
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -187,16 +185,22 @@ public class EncryptUtils {
 		// System.out.println("code:"+crc32);
 
 
-		String uid = "3b942b39b840495e86a11eb5744951f0";
+		String uid = "3c5c30ac26f643e0bb3a6109b8cc2551";
 		String key = "5cf8c22d98f7b475";
 		JSONObject userid = new JSONObject() {{
 			put("userid", uid);
 		}};
-		System.out.println(userid.toJSONString());
-		System.out.println(userid.toString());
-		String s1 = encryptWithAES(userid.toJSONString(), key);
+		byte[] encrypt = encryptWithAES(userid.toJSONString(), key);
 
+		String s = Base64Utils.encodeToString(encrypt);
+		// String s1 = Base64Utils.encodeToUrlSafeString(encrypt);
+		System.out.println(s);
+		// System.out.println(s1);
+		String s1 = HttpSignUtil.urlEncode(s);
 		System.out.println(s1);
+		String code = "orHO%2F%2BI3bcF3M1HUn7btRLV4ctGv2R%2BnZwfiMqCV%2Fa5LyEE%2FUO0oQ7K4hL3tTHiW";
+
+		Assert.isTrue(s1.equals(code),"应该相等");
 
 	}
 }

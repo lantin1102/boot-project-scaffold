@@ -1,6 +1,7 @@
 package com.lantin.common.utils;
 
 import org.springframework.util.DigestUtils;
+import org.springframework.util.StringUtils;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -11,42 +12,65 @@ import java.util.TreeMap;
 public class HttpSignUtil {
 
 	/**
-	 * 对参数map不作urlencode，可用于已经encode过的参数map加签
+	 * 参数map不作urlencode，可用于已经encode过的参数map加签
 	 *
-	 * @param queryMap 参数map
+	 * @param queryMap  参数map
 	 * @param useSecret 是否使用密钥
-	 * @param secret 密钥
+	 * @param secret    密钥
 	 * @return
 	 */
-	public static String getSignWithOutUrlEncode(Map<String, String> queryMap, boolean useSecret, String secret) {
+	public static String getSignWithOutUrlEncode(Map<String, String> queryMap, String secret) {
 		Map<String, String> sortedMap = new TreeMap<>(queryMap);
-		String strToEncrypt = getSignString(sortedMap, false, false);
-		return digestSignCode(strToEncrypt, useSecret, secret);
+		String strToEncrypt = getTextToSigned(sortedMap, false, false);
+		return getSignText(strToEncrypt, StringUtils.hasText(secret), secret);
 	}
 
-	private static String digestSignCode(String strToEncrypt, boolean useSecret, String secret) {
+	private static String getSignText(String strToEncrypt, boolean useSecret, String secret) {
 		if (strToEncrypt.length() > 0) {
 			strToEncrypt = strToEncrypt.substring(0, strToEncrypt.length() - 1);
 		}
 		String format = String.format("%s%s", strToEncrypt, useSecret ? secret : "");
-		System.out.println(format);
-		return DigestUtils.md5DigestAsHex(format.getBytes(StandardCharsets.UTF_8));
+		return md5(format);
+	}
+
+	public static String urlEncode(String source) {
+		return urlEncode(source, true);
+	}
+
+	public static String getSign(Map<String, String> queryMap, String secret) {
+		return getSign(queryMap, StringUtils.hasText(secret),secret,false);
 	}
 
 	/**
-	 * @param queryMap       查询字符串map
-	 * @param useSecret      是否使用secret
-	 * @param secret         secret
-	 * @param encodeBlankToPlus 如果为true 使用原生urlencode将空格编码为加号'+' 否则encode为'%20'
+	 * @param queryMap          查询字符串map
+	 * @param useSecret         是否使用secret
+	 * @param secret            secret
+	 * @param encodeBlankToPlus 如果为true 使用Java原生url encode将空格编码为加号'+' 否则encode为'%20'
+	 *                          ,默认采用RFC 3986规范 将空格编码为'%20'
 	 * @return sign
 	 */
 	public static String getSign(Map<String, String> queryMap, boolean useSecret, String secret, boolean encodeBlankToPlus) {
 		Map<String, String> sortedMap = new TreeMap<>(queryMap);
-		String strToEncrypt = getSignString(sortedMap, encodeBlankToPlus, true);
-		return digestSignCode(strToEncrypt, useSecret, secret);
+		String strToEncrypt = getTextToSigned(sortedMap, encodeBlankToPlus, true);
+		return getSignText(strToEncrypt, useSecret, secret);
 	}
 
-	private static String getSignString(Map<String, String> sortedMap, boolean encodeBlankToPlus, boolean useUrlEncode) {
+	public static String getLiveLinkSign(Map<String, String> queryMap, String secret) {
+		Map<String, String> sortedMap = new TreeMap<>(queryMap);
+		StringBuilder raw = new StringBuilder();
+		for (Map.Entry<String, String> next : sortedMap.entrySet()) {
+			raw.append(urlEncode(next.getValue(), false)).append("+");
+		}
+		raw.append(secret);
+		return md5(raw.toString());
+	}
+
+	private static String md5(String raw) {
+		return DigestUtils.md5DigestAsHex(raw.getBytes(StandardCharsets.UTF_8));
+	}
+
+
+	private static String getTextToSigned(Map<String, String> sortedMap, boolean encodeBlankToPlus, boolean useUrlEncode) {
 		StringBuilder sb = new StringBuilder();
 		for (Map.Entry<String, String> entry : sortedMap.entrySet()) {
 			String key = entry.getKey();

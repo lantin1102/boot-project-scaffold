@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2021/11/27 17:16 周六
  */
 
+
 @SpringBootApplication
 public class LantinApplication {
 

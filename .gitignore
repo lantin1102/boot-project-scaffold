@@ -7,7 +7,7 @@
 target/
 out
 gen
-
+logs/
 # Compiled class file
 *.class
 

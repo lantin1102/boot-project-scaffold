@@ -1,6 +1,7 @@
 package com.lantin.config;
 
 import com.lantin.test.base.BaseSpringBootTest;
+import com.lantin.web.domain.JsonData;
 import com.lantin.web.domain.book.dto.BookDto;
 import org.junit.jupiter.api.Test;
 import org.redisson.api.RBucket;
@@ -10,8 +11,12 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -25,7 +30,62 @@ public class RedissonConfigTest extends BaseSpringBootTest {
 	RedissonClient redissonClient;
 
 	@Test
-	public void test() throws ExecutionException, InterruptedException {
+	public void test1(){
+		System.out.println(Integer.MAX_VALUE);
+	}
+
+	@Test
+	public void testJavaTime(){
+		JsonData jsonData = new JsonData();
+
+		jsonData.setLocalTime(LocalTime.now());
+		jsonData.setDateTime(LocalDateTime.now());
+
+		redissonClient.getBucket("test.time").set(jsonData);
+	}
+
+	@Test
+	public void testAtomicLong(){
+		String key = "test.atomic.long&1";
+		long l1 = redissonClient.getAtomicLong(key).incrementAndGet();
+		int l =(int) l1;
+		System.out.println(l);
+		System.out.println(l1);
+
+		List<String> keyList = new ArrayList<>();
+		keyList.add(key);
+		Map<String, Object> stringObjectMap = redissonClient.getBuckets().get(keyList.toArray(new String[0]));
+		String s = String.valueOf(stringObjectMap.get(key));
+
+		System.out.println(s);
+
+
+
+	}
+
+	@Test
+	public void testAtomicLong2(){
+		String list = "43605253,43609393,43606531,43607342,527771530,3509221,39816453,286280139,43610599,39464379";
+
+		String[] split = list.split(",");
+
+		List<String> strings = Arrays.asList(split);
+
+		System.out.println(strings);
+	}
+
+	@Test
+	public void testMget(){
+		List<String> keyList = new ArrayList<>();
+		String key1 = "activity.user.behavior.count:5985330293082368:2334&LIKE";
+		keyList.add(key1);
+		Map<String, Object> stringObjectMap = redissonClient.getBuckets().get(keyList.toArray(new String[0]));
+
+		// String s = stringObjectMap.get(key1);
+	}
+
+	@Test
+	public void testAtomicLong3() throws ExecutionException, InterruptedException {
 
 		System.out.println(redissonClient);
 		String keyPre = "domain:boot:";
@@ -40,11 +100,6 @@ public class RedissonConfigTest extends BaseSpringBootTest {
 		RFuture<Object> async = redissonClient.getBucket(key1).getAsync();
 		Object o = async.get();
 		System.out.println(o);
-	}
-
-	@Test
-	public void testList(){
-
 	}
 
 	@Test
@@ -67,11 +122,12 @@ public class RedissonConfigTest extends BaseSpringBootTest {
 			cList.expire(10,TimeUnit.HOURS);
 		}
 
-
 		RList<Object> cList1 = redissonClient.getList("cList");
 
 		cList1.add(new Object());
 	}
+
+
 
 	@Test
 	public void test11(){
