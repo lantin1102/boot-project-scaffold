@@ -56,5 +56,9 @@ spring:
         bootstrap-servers: 172.16.38.100:9092
         max-poll-records: 100
         group-id: my-boot-factory-default
+      listener:
+        # 批量消费
+        type: batch
+        idle-between-polls: 500
 
 
