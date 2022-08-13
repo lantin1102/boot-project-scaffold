@@ -26,7 +26,7 @@
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
 
         <!--依赖包版本-->
-        <ali.fastjson.version>1.2.75</ali.fastjson.version>
+        <ali.fastjson.version>1.2.83</ali.fastjson.version>
         <ali.druid.version>1.2.6</ali.druid.version>
         <commons.lang3.version>3.12.0</commons.lang3.version>
         <jackson.version>2.9.8</jackson.version>

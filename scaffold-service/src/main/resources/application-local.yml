@@ -5,6 +5,13 @@ spring:
     password: sxdBETsi0nPhgXgTTGlb9cwo84jcW6UXXhBLt2vujWo
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:13306/mydb?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    hikari:
+      maximum-pool-size: 150
+      minimum-idle: 25
+      connection-timeout: 1500
+      # 允许连接在池中处于空闲状态的最大时间,单位:ms 默认:10min
+      idle-timeout: 120000
+      connection-init-sql: set names utf8mb4;
   # 线程池自动配置
   task:
     execution:
@@ -12,6 +19,7 @@ spring:
       pool:
         allow-core-thread-timeout: true
         core-size: 100
+  # redis
   redis:
     host: localhost
     port: 6379
@@ -31,3 +39,22 @@ spring:
         min-idle: 0
     redisson:
       file: classpath:config/redisson-local.yml
+  # kafka
+  kafka:
+    activity:
+      producer:
+        bootstrap-servers: 172.16.38.181:9092
+        topic: local-activity-pendant-insert-db-name
+      consumer:
+        topic: local-activity-pendant-insert-db-name
+        bootstrap-servers: 172.16.38.181:9092
+        max-poll-records: 100
+        group-id: my-boot-factory-default
+    game-login:
+      consumer:
+        topic: bili_trace_notify
+        bootstrap-servers: 172.16.38.100:9092
+        max-poll-records: 100
+        group-id: my-boot-factory-default
+
+

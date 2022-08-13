@@ -12,6 +12,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.text.Collator;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
@@ -20,6 +21,50 @@ import java.util.*;
  */
 public class CommonTest {
 
+	@Test
+	public void uuid(){
+		String replace = UUID.randomUUID().toString().replace("-", "");
+
+		String str1 = "fadsba|fda";
+
+		str1.replace("|","%7C");
+
+		System.out.println(str1);
+
+		ConcurrentHashMap<Object, Object> map = new ConcurrentHashMap<>();
+		HashMap<Object, Object> map1 = new HashMap<>();
+
+
+	}
+
+	@Test
+	public void test3(){
+
+		String str = "358490314";
+
+		String[] split = str.split(",");
+
+		List<String> strings = Arrays.asList(split);
+
+		System.out.println(strings);
+
+
+		String s = new String("358490314");
+
+		System.out.println(strings.contains(s));
+
+
+
+	}
+
+
+	@Test
+	public void test123(){
+
+		String s = "https://uat-i0.hdslb.com/bfs/game/27412346f286da2871a15ae36318bf5cf2bea5c9.jpg";
+
+		System.out.println(s.length());
+	}
 
 	@Test
 	public void sortTest() {
@@ -224,6 +269,13 @@ public class CommonTest {
 			Collator instance = Collator.getInstance(Locale.CHINESE);
 			return instance.compare(this.name, o.getName());
 		}
+	}
+
+	@Test
+	public void testUUID(){
+		String replace = UUID.randomUUID().toString().replace("-", "");
+
+		System.out.println(replace.length());
 	}
 
 }

@@ -25,7 +25,7 @@ public class TestConfiguration {
 	DemoA demoA(){
 		System.out.println(configMillis);
 		System.out.println(configTpl);
-		environment.getProperty("abc");
+		environment.getProperty("my.name");
 		return new DemoA();
 	}
 

@@ -25,6 +25,7 @@ public class GsonUtil {
 	static {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.enableComplexMapKeySerialization()
+				.setDateFormat("yyyy-MM-dd HH:mm:ss")
 				.registerTypeAdapter(LocalDateTime.class, localDateTimeSerializer)
 				.registerTypeAdapter(LocalDate.class, localDateSerializer)
 				.registerTypeAdapter(LocalTime.class, localTimeSerializer)

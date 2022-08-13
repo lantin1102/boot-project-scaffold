@@ -3,7 +3,6 @@ package com.lantin.config;
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.lantin.common.utils.SnowFlakeIdWorker;
-import com.lantin.test.base.BaseSpringBootTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,7 +13,14 @@ import java.util.ArrayList;
  * @author Gan Luanqing
  * @date 2021/11/28 20:21 周日
  */
-public class IdWorkerTest extends BaseSpringBootTest {
+public class IdWorkerTest {
+
+	@Test
+	public void test3(){
+		long id = IdWorker.getId();
+
+		System.out.println(id);
+	}
 
 	@Test
 	public void test() throws InterruptedException {

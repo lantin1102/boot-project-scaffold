@@ -17,7 +17,7 @@ public class AsyncService {
 
 
 	@Async
-	@Retryable(value = MallReleaseAssetRetryException.class,
+	@Retryable( value = MallReleaseAssetRetryException.class,
 			backoff = @Backoff(delay = 2000L, multiplier = 2))
 	public void serviceA(int x) {
 

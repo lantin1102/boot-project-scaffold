@@ -2,7 +2,10 @@ server:
   port: 8088
   servlet:
     context-path: /
+  shutdown: graceful
 spring:
+  lifecycle:
+    timeout-per-shutdown-phase: PT30S
   mvc:
     servlet:
       load-on-startup: 1
@@ -36,12 +39,16 @@ com:
     id-worker:
       data-center-id: 1
       work-id: 3
+feign:
+  client:
+    livelink:
+      secretKey: 0420e6119e71bcf7
+      baseUrl: https://open.livelink.qq.com/
 logging:
   pattern:
     console: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
-  file:
-    name: logs/local.logs
   level:
     root: info
     com.baomidou.mybatisplus: debug
-
+    api_client: debug
+    org.apache.kafka.clients.NetworkClient: off

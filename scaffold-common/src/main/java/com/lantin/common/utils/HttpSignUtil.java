@@ -22,6 +22,7 @@ public class HttpSignUtil {
 	public static String getSignWithOutUrlEncode(Map<String, String> queryMap, String secret) {
 		Map<String, String> sortedMap = new TreeMap<>(queryMap);
 		String strToEncrypt = getTextToSigned(sortedMap, false, false);
+		System.out.println(strToEncrypt);
 		return getSignText(strToEncrypt, StringUtils.hasText(secret), secret);
 	}
 
@@ -80,7 +81,9 @@ public class HttpSignUtil {
 			}
 			if (useUrlEncode) {
 				value = urlEncode(value, encodeBlankToPlus);
+
 			}
+			System.out.println("key["+key+"]---value["+value+"]");
 			sb.append(key).append("=").append(value).append("&");
 		}
 		return sb.toString();
@@ -91,12 +94,15 @@ public class HttpSignUtil {
 		if (encodeBlankToPlus) {
 			return encodedStr;
 		}
-		String replace = encodedStr.replace("+", "%20");
-		System.out.println(replace);
-		return replace;
+		return encodedStr.replace("+", "%20");
 	}
 
+
+
 	public static void main(String[] args) {
+
+		String encode = URLEncoder.encode(" ", StandardCharsets.UTF_8);
+		System.out.println(encode);
 		Map<String, String> queryMap = new HashMap<>();
 		queryMap.put("game_id", "5402");
 		queryMap.put("uid", "3508041");

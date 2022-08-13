@@ -2,10 +2,11 @@ package com.lantin.common.utils;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Base64Utils;
-import org.springframework.util.StringUtils;
 
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 class HttpSignUtilTest {
 
@@ -17,14 +18,14 @@ class HttpSignUtilTest {
 	@Test
 	void getSign() {
 		Map<String, String> queryMap = new HashMap<>();
-		queryMap.put("sdk_type","1");
-		queryMap.put("game_base_id","97");
-		queryMap.put("ts","1648465099332");
-		queryMap.put("appkey","ZM7LjTpy8uJnowNK");
-		String signCode = HttpSignUtil.getSign(queryMap, true, "PkJq6CwQrqJk4oX2pqEu7rJghxBGcgfR",true);
-		System.out.println("sign:"+signCode);
-		queryMap.put("sign",signCode);
-		System.out.println(queryMap);
+		queryMap.put("role_id","40697113608918");
+		queryMap.put("cdkey","我是傻逼");
+		queryMap.put("ts", String.valueOf(System.currentTimeMillis()));
+		queryMap.put("server_id","10268");
+		System.out.println(queryMap.get("ts"));
+		String sign = HttpSignUtil.getSignWithOutUrlEncode(queryMap, "36521u54p3cc8");
+		System.out.println(sign);
+
 	}
 
 
@@ -54,8 +55,8 @@ class HttpSignUtilTest {
 	@Test
 	public void gameLastLogin(){
 		Map<String, String> queryMap = new HashMap<>();
-		queryMap.put("game_id","1524,113");
-		queryMap.put("uid","26778824");
+		queryMap.put("game_id","0");
+		queryMap.put("uid","1703629406");
 		queryMap.put("ts","1648465099332");
 		queryMap.put("appkey","klnMm4IwB0wVKd5M");
 		String sign = HttpSignUtil.getSign(queryMap, true, "NMl2lj4eJK2plFiXJ1Di3ECFW8zykCVg",true);
@@ -93,7 +94,7 @@ class HttpSignUtilTest {
 		queryMap.put("appkey","0c6f484ca0d51f9c69ee");
 		queryMap.put("ts","1649325341625");
 		String secret = "21b7abb4d8d360cf0b49e14d1bac7ea0";
-		String signCode = HttpSignUtil.getSignWithOutUrlEncode(queryMap, true, secret);
+		String signCode = HttpSignUtil.getSignWithOutUrlEncode(queryMap, secret);
 		queryMap.put("sign",signCode);
 		System.out.println("sign:"+signCode);
 		System.out.println(queryMap);
@@ -117,7 +118,7 @@ class HttpSignUtilTest {
 		queryMap.put("ts","1649324460340");
 		queryMap.put("platform","web");
 		String secret = "21b7abb4d8d360cf0b49e14d1bac7ea0";
-		String signCode = HttpSignUtil.getSignWithOutUrlEncode(queryMap, true, secret);
+		String signCode = HttpSignUtil.getSignWithOutUrlEncode(queryMap, secret);
 		queryMap.put("sign",signCode);
 		System.out.println("sign:"+signCode);
 		System.out.println(queryMap);
@@ -127,31 +128,28 @@ class HttpSignUtilTest {
 
 	public void liveLinkFlow(){
 		Map<String, String> queryMap = new HashMap<>();
-		String openId = "3b942b39b840495e86a11eb5744951f0";
+		String openId = "efc2c1a13a4e4cf6816ca68c320ed779";
 		String encKey = "5cf8c22d98f7b475";
 		HashMap<String, String> map = new HashMap<>();
 		map.put("userid",openId);
 		String userJson = JsonUtils.fastObj2json(map);
-		queryMap.put("actId","2583");
+		queryMap.put("actId","2897");
+		queryMap.put("gameId","lv");
 		// queryMap.put("apiName","ApiRequest");
 		queryMap.put("code",Base64Utils.encodeToString(EncryptUtils.encryptWithAES(userJson,encKey)));
-		System.out.println(queryMap.get("code"));
-		queryMap.put("gameId","lgamem");
+		String code = queryMap.get("code");
+		System.out.println(URLEncoder.encode(code));
 		queryMap.put("livePlatId","bilibili");
 		queryMap.put("logintype","qq");
-		queryMap.put("nonce","3NCDMt");
-		queryMap.put("t","1655892961");
+		String nonce = UUID.randomUUID().toString().substring(0, 8);
+		queryMap.put("nonce", nonce);
+		System.out.println("nonce:"+nonce);
+		String t = String.valueOf(System.currentTimeMillis()/1000);
+		queryMap.put("t",t);
+		System.out.println("t="+t);
 		queryMap.put("v","2.0");
 		String signSecret = "0420e6119e71bcf7";
 		String signCode = HttpSignUtil.getLiveLinkSign(queryMap, signSecret);
-		String sign = HttpSignUtil.getSign(queryMap, signSecret);
 		System.out.println("sign:"+signCode);
-		System.out.println("common sign:"+sign);
-
-		String x = "   ";
-
-		boolean b = StringUtils.hasText(x);
-		boolean b1 = StringUtils.hasLength(x);
-		System.out.println(b1);
 	}
 }
