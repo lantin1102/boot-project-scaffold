@@ -20,7 +20,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -55,8 +54,8 @@ public class RedissonConfig {
 
 	private ObjectMapper getOm(){
 		ObjectMapper mapper = new ObjectMapper();
-		// Date类型格式化
-		mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+		// // Date类型格式化
+		// mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 		// java8 新的时间类 格式化
 		JavaTimeModule javaTimeModule = new JavaTimeModule();
 		//  注意 同一个时间类型不能使用两个格式化格式 后一个会覆盖前一个

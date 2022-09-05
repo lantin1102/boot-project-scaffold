@@ -5,7 +5,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lantin.common.domain.response.CommonResponse;
 import com.lantin.web.domain.account.Account;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.junit.Test;
 
@@ -20,6 +19,22 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date 2021/11/27 20:13 周六
  */
 public class CommonTest {
+
+
+	@Test
+	public void test5(){
+		String reg = "^[1-9]$";
+
+		String reg1 = "^bucket$";
+
+		// String str = "bucket";
+		// boolean matches = str.matches(reg1);
+		// System.out.println(matches);
+
+		String str = "12";
+		System.out.println(str.matches(reg));
+
+	}
 
 	@Test
 	public void uuid(){
@@ -48,12 +63,9 @@ public class CommonTest {
 
 		System.out.println(strings);
 
-
 		String s = new String("358490314");
 
 		System.out.println(strings.contains(s));
-
-
 
 	}
 
@@ -113,8 +125,13 @@ public class CommonTest {
 		ArrayList<String> strings = new ArrayList<>(Arrays.asList(newArray));
 		List<People> peopleList = new ArrayList<>();
 		for (int i = 0; i < strings.size(); i++) {
-			People people = new People(i + 1, strings.get(i));
-			peopleList.add(people);
+			People p = new People();
+			p.setId(i+1);
+			p.setName(strings.get(i));
+			// People people = new com.lantin.test.CommonTest.People(i + 1, strings.get(i));
+			// peopleList.add(people);
+			peopleList.add(p);
+
 		}
 
 		Collections.sort(strings);
@@ -131,8 +148,10 @@ public class CommonTest {
 		ArrayList<String> strings = new ArrayList<>(Arrays.asList(newArray));
 		List<People> peopleList = new ArrayList<>();
 		for (int i = 0; i < strings.size(); i++) {
-			People people = new People(i + 1, strings.get(i));
-			peopleList.add(people);
+			People p = new People();
+			p.setId(i+1);
+			p.setName(strings.get(i));
+			peopleList.add(p);
 		}
 
 		Collections.sort(peopleList);
@@ -256,8 +275,8 @@ public class CommonTest {
 
 
 	@Data
-	@AllArgsConstructor
-	static class People implements Comparable<People> {
+	static
+	class People implements Comparable<People> {
 		private int id;
 
 		private String name;

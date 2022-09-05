@@ -7,13 +7,24 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 class HttpSignUtilTest {
 
 	@Test
 	public void test(){
-		System.out.println(Integer.MAX_VALUE);
-		System.out.println(Long.MAX_VALUE);
+
+		ExecutorService executorService = Executors.newFixedThreadPool(100);
+
+
+
+
+		Map<String, String> queryMap = new HashMap<>();
+		queryMap.put("game_base_id","103496,105667");
+		String sign = HttpSignUtil.getSign(queryMap, "8f3550e0c04211e79ddafe210a2e3379");
+		System.out.println(sign);
+
 	}
 	@Test
 	void getSign() {
@@ -24,6 +35,17 @@ class HttpSignUtilTest {
 		queryMap.put("server_id","10268");
 		System.out.println(queryMap.get("ts"));
 		String sign = HttpSignUtil.getSignWithOutUrlEncode(queryMap, "36521u54p3cc8");
+		System.out.println(sign);
+
+	}
+	@Test
+	public void getGameIds(){
+		Map<String, String> queryMap = new HashMap<>();
+		queryMap.put("game_base_id","183,102216");
+		queryMap.put("appkey","ZM7LjTpy8uJnowNK");
+		queryMap.put("ts", String.valueOf(System.currentTimeMillis()));
+		String sign = HttpSignUtil.getSign(queryMap, "PkJq6CwQrqJk4oX2pqEu7rJghxBGcgfR");
+
 		System.out.println(sign);
 
 	}
@@ -55,8 +77,8 @@ class HttpSignUtilTest {
 	@Test
 	public void gameLastLogin(){
 		Map<String, String> queryMap = new HashMap<>();
-		queryMap.put("game_id","0");
-		queryMap.put("uid","1703629406");
+		queryMap.put("game_id","2270");
+		queryMap.put("uid","3508041");
 		queryMap.put("ts","1648465099332");
 		queryMap.put("appkey","klnMm4IwB0wVKd5M");
 		String sign = HttpSignUtil.getSign(queryMap, true, "NMl2lj4eJK2plFiXJ1Di3ECFW8zykCVg",true);

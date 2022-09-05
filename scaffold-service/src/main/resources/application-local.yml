@@ -19,7 +19,8 @@ spring:
       pool:
         allow-core-thread-timeout: true
         core-size: 100
-  # redis
+  cache:
+    type: redis
   redis:
     host: localhost
     port: 6379

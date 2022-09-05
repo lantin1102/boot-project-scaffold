@@ -10,13 +10,12 @@ import org.springframework.scheduling.support.CronTrigger;
 @Slf4j
 public class DynamicCronTask implements SchedulingConfigurer {
 
-	private static String cron;
+	private String cron;
 
 	private static final String defaultCron = "0/5 * * * * *";
 
-	DynamicCronTask (){
+	DynamicCronTask() {
 		cron = defaultCron;
-
 	}
 
 	@Override

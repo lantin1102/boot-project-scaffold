@@ -31,6 +31,7 @@ public class HttpSignUtil {
 			strToEncrypt = strToEncrypt.substring(0, strToEncrypt.length() - 1);
 		}
 		String format = String.format("%s%s", strToEncrypt, useSecret ? secret : "");
+		System.out.println(format);
 		return md5(format);
 	}
 
